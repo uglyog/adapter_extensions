@@ -28,7 +28,7 @@ protected
   # * <tt>:delimited_by</tt> -- The field delimiter
   # :columns is currently unsupported and will raise an exception
   def do_bulk_load(filename, table_name, options={})
-    env_name = options[:env] || Rails.env
+    env_name = options[:env] || (defined? Rails ? Rails.env : nil)
     config = ActiveRecord::Base.configurations[env_name]
 
     raise NotImplementedError.new(":columns option is not currently supported") if options[:columns]
